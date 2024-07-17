@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:tractian/controller/menu_controller.dart';
 
@@ -25,7 +24,11 @@ class _MenuPageState extends State<MenuPage> {
         child: ListView.builder(
           itemCount: menuController.companies.length,
           itemBuilder: (context, index) {
-            return Text(menuController.companies[index].name);
+            return ElevatedButton.icon(
+              onPressed: () => menuController.locationAssetPage(context, menuController.companies[index].id), 
+              icon: const Icon(Icons.lan_outlined), 
+              label: Text(menuController.companies[index].name));
+            // Text(menuController.companies[index].name);
           },
         ),
       ),
