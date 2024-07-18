@@ -4,4 +4,6 @@ class AppEnv {
   static const String company = '$apiUrl/companies';
 
   static const String location = 'locations';
+
+  static const String asset = 'assets';
 }

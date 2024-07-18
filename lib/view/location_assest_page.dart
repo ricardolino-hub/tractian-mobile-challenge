@@ -18,12 +18,15 @@ class _LocationAssestPageState extends State<LocationAssestPage> {
     super.initState();
     locationAssetController.addListener(() {setState(() {});});
     locationAssetController.getLocations(widget.idCompany);
+    locationAssetController.getAssets(widget.idCompany);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Center(child: Text('Assets')),
+      ),
       body: const Center(
         child: Text('Location - Asset'),
       ),
