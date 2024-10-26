@@ -7,6 +7,7 @@ class AssetModel {
   final String? status;
   final String? gatewayId;
   final String? locationId;
+  final List<dynamic>? children = [];
 
   AssetModel({
     required this.id,

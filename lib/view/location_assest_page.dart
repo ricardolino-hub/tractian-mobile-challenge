@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tractian/controller/location_asset_controller.dart';
+import 'package:tractian/view/components/tree_widget.dart';
 
 class LocationAssestPage extends StatefulWidget {
   const LocationAssestPage({super.key, required this.idCompany});
@@ -16,9 +17,9 @@ class _LocationAssestPageState extends State<LocationAssestPage> {
   @override
   void initState() {
     super.initState();
+
     locationAssetController.addListener(() {setState(() {});});
-    locationAssetController.getLocations(widget.idCompany);
-    locationAssetController.getAssets(widget.idCompany);
+    locationAssetController.buildTree(widget.idCompany);
   }
 
   @override
@@ -27,9 +28,11 @@ class _LocationAssestPageState extends State<LocationAssestPage> {
       appBar: AppBar(
         title: const Center(child: Text('Assets')),
       ),
-      body: const Center(
-        child: Text('Location - Asset'),
-      ),
-    );
+      body: locationAssetController.roots.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView(
+              children: locationAssetController.roots.map((root) => TreeNodeWidget(node: root)).toList(),
+            ),
+      );
   }
 }
