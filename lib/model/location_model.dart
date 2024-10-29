@@ -10,7 +10,7 @@ class LocationModel {
     return LocationModel(
       id: json['id'],
       name: json['name'],
-      parentId: json['parent_id'],
+      parentId: json['parentId'],
     );
   }
 }

@@ -16,16 +16,20 @@ class LocationAssetController extends ChangeNotifier{
 
     Map<String, dynamic> nodeMap = {};
 
-    for (var item in [...assets, ...locations]) {
-      if (item is AssetModel) {
-        nodeMap[item.id] = item;
-      } else if (item is LocationModel) {
-        nodeMap[item.id] = item;
-      }
+    for (var component in components) {
+      nodeMap[component.id] = component;
+    }
+
+    for (var asset in assets) {
+      nodeMap[asset.id] = asset;
+    }
+
+    for (var location in locations) {
+      nodeMap[location.id] = location;
     }
 
     for (var node in nodeMap.values) {
-      if (node.parentId != null && nodeMap.containsKey(node.parentId!)) {
+      if (node.parentId != null) {
         nodeMap[node.parentId!]!.children.add(node);
       } else {
         roots.add(node);
