@@ -67,4 +67,18 @@ class LocationAssetController extends ChangeNotifier{
 
     notifyListeners();
   }
+
+  final List<bool> _isSelected = [false, false];
+  List<bool> get isSelected => _isSelected;
+
+  toggleSelection(int index) {
+    isSelected[index] = !isSelected[index];
+    if (index == 0) {
+      isSelected[1] = false;
+    } else {
+      isSelected[0] = false;
+    }
+
+    notifyListeners();
+  }
 }

@@ -42,6 +42,7 @@ class TreeNodeWidgetState extends State<TreeNodeWidget> {
                 widget.node is LocationModel 
                   ? Icons.location_on_outlined 
                   : widget.node.sensorType != null ? Icons.sensors_outlined : CupertinoIcons.cube,
+                color: const Color.fromARGB(255, 33, 136, 255),
               ),
 
               const SizedBox(width: 4.0),
@@ -53,24 +54,26 @@ class TreeNodeWidgetState extends State<TreeNodeWidget> {
 
               const SizedBox(width: 4.0),
 
-              widget.node is AssetModel ?
-                widget.node.sensorType != null 
-                  ? widget.node.status == "alert" 
-                    ? Container(
-                      width: 8.0,
-                      height: 8.0,
-                      decoration: const BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.circle,
-                      ),
-                    )
-                    : const Icon(
+              widget.node is AssetModel && widget.node.sensorType != null && widget.node.status == "alert" 
+                ? Container(
+                  width: 8.0,
+                  height: 8.0,
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                )
+                : Container(),
+                   
+              
+              widget.node is AssetModel && widget.node.sensorType != null && widget.node.sensorType == "energy"
+                ? const Icon(
                       Icons.flash_on,
                       color: Colors.green,
                       size: 16,
                     )
-                  :Container()
-                : Container(),
+                : Container()
+
 
               
             ],
