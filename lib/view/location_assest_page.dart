@@ -42,7 +42,10 @@ class _LocationAssestPageState extends State<LocationAssestPage> {
           : SingleChildScrollView(
             child: Column(
               children: [
-                CustomTextField(),
+                CustomTextField(
+                  onTextChanged: locationAssetController.updateFilterText,
+                  controller: locationAssetController.controllerCustomTextField,
+                ),
                 ToggleSelectionButtons(
                     isSelected: locationAssetController.isSelected,
                     onPressed: locationAssetController.toggleSelection,
@@ -50,7 +53,9 @@ class _LocationAssestPageState extends State<LocationAssestPage> {
                 const Divider(),
                 ListView(
                     shrinkWrap: true,
-                    children: locationAssetController.roots.map((root) => TreeNodeWidget(node: root)).toList(),
+                    children: locationAssetController.filteredRoots
+                              .map((root) => TreeNodeWidget(node: root))
+                              .toList(),
                   ),
               ],
             ),

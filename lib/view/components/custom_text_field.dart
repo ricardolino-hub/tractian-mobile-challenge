@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   final String labelText;
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController controller;
+  final ValueChanged<String> onTextChanged;
 
-  CustomTextField({
+  const CustomTextField({
     Key? key,
     this.labelText = 'Buscar Ativo ou Local',
+    required this.controller,
+    required this.onTextChanged,
   })  : super(key: key);
 
   @override
@@ -29,7 +32,7 @@ class CustomTextField extends StatelessWidget {
         ),
         style: const TextStyle(color: Colors.black),
         onChanged: (value) {
-          print("Texto digitado: $value");
+          onTextChanged(value);
         },
       ),
     );
