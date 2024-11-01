@@ -39,26 +39,28 @@ class _LocationAssestPageState extends State<LocationAssestPage> {
       ),
       body: locationAssetController.roots.isEmpty
           ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-            child: Column(
-              children: [
-                CustomTextField(
-                  onTextChanged: locationAssetController.updateFilterText,
-                  controller: locationAssetController.controllerCustomTextField,
-                ),
-                ToggleSelectionButtons(
-                    isSelected: locationAssetController.isSelected,
-                    onPressed: locationAssetController.toggleSelection,
-                ),
-                const Divider(),
-                ListView(
-                    shrinkWrap: true,
-                    children: locationAssetController.filteredRoots
-                              .map((root) => TreeNodeWidget(node: root))
-                              .toList(),
+          : Column(
+            children: [
+              CustomTextField(
+                onTextChanged: locationAssetController.updateFilterText,
+                controller: locationAssetController.controllerCustomTextField,
+              ),
+              ToggleSelectionButtons(
+                  isSelected: locationAssetController.isSelected,
+                  onPressed: locationAssetController.toggleSelection,
+              ),
+              const Divider(),
+              Expanded(
+                  child: ListView.builder(
+                    itemCount: locationAssetController.filteredRoots.length,
+                    itemBuilder: (context, index) {
+                      return TreeNodeWidget(
+                        node: locationAssetController.filteredRoots[index],
+                      );
+                    },
                   ),
-              ],
-            ),
+                ),
+            ],
           ),
       );
   }

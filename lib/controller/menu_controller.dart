@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:tractian/model/company_model.dart';
 import 'package:tractian/service/company_service.dart';
@@ -15,7 +14,6 @@ class MenuController extends ChangeNotifier{
   getComponies() async {
     companies.clear();
     companies.addAll(await CompanyService.getCompanies() ?? []);
-    log('companies: ${companies.length}');
     notifyListeners();
   }
 

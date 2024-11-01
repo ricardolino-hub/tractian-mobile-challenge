@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:tractian/model/asset_model.dart';
 import 'package:tractian/service/location_asset_service.dart';
