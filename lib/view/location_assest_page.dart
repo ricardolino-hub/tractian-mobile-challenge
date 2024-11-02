@@ -37,9 +37,7 @@ class _LocationAssestPageState extends State<LocationAssestPage> {
           },
         ),
       ),
-      body: locationAssetController.roots.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : Column(
+      body: Column(
             children: [
               CustomTextField(
                 onTextChanged: locationAssetController.updateFilterText,
@@ -50,7 +48,9 @@ class _LocationAssestPageState extends State<LocationAssestPage> {
                   onPressed: locationAssetController.toggleSelection,
               ),
               const Divider(),
-              Expanded(
+              locationAssetController.filteredRoots.isEmpty
+                ? const Center(child: CircularProgressIndicator())
+                : Expanded(
                   child: ListView.builder(
                     itemCount: locationAssetController.filteredRoots.length,
                     itemBuilder: (context, index) {
