@@ -15,12 +15,12 @@ class LocationAssestPage extends StatefulWidget {
 class _LocationAssestPageState extends State<LocationAssestPage> {
   LocationAssetController locationAssetController = LocationAssetController();
 
-
   @override
   void initState() {
     super.initState();
-
-    locationAssetController.addListener(() {setState(() {});});
+    locationAssetController.addListener(() {
+      setState(() {});
+    });
     locationAssetController.buildTree(widget.idCompany);
   }
 
@@ -31,27 +31,27 @@ class _LocationAssestPageState extends State<LocationAssestPage> {
         backgroundColor: const Color.fromARGB(255, 23, 25, 45),
         title: const Center(child: Text('Assets')),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new), // Substitua pelo ícone desejado
+          icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {
-            Navigator.pop(context); // Ação de voltar para a tela anterior
+            Navigator.pop(context);
           },
         ),
       ),
       body: Column(
-            children: [
-              CustomTextField(
-                onTextChanged: locationAssetController.updateFilterText,
-                controller: locationAssetController.controllerCustomTextField,
-              ),
-              ToggleSelectionButtons(
-                  isSelected: locationAssetController.isSelected,
-                  onPressed: locationAssetController.toggleSelection,
-              ),
-              const Divider(),
-              locationAssetController.filteredRoots.isEmpty
+        children: [
+          CustomTextField(
+            onTextChanged: locationAssetController.updateFilterText,
+            controller: locationAssetController.controllerCustomTextField,
+          ),
+          ToggleSelectionButtons(
+            isSelected: locationAssetController.isSelected,
+            onPressed: locationAssetController.toggleSelection,
+          ),
+          const Divider(),
+          Expanded(
+            child: locationAssetController.filteredRoots.isEmpty
                 ? const Center(child: CircularProgressIndicator())
-                : Expanded(
-                  child: ListView.builder(
+                : ListView.builder(
                     itemCount: locationAssetController.filteredRoots.length,
                     itemBuilder: (context, index) {
                       return TreeNodeWidget(
@@ -59,9 +59,9 @@ class _LocationAssestPageState extends State<LocationAssestPage> {
                       );
                     },
                   ),
-                ),
-            ],
           ),
-      );
+        ],
+      ),
+    );
   }
 }
